@@ -8,10 +8,18 @@ const Contact = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Simulate submission
-        alert('Message sent! Nexus has logged your request.');
+        await axios("https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact", 
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: formData
+            }
+        );
         setFormData({ name: '', email: '', message: '' });
     };
 
