@@ -60,7 +60,6 @@ const Admin = () => {
 
     return (
         <div className="min-h-screen pt-20 flex">
-            {/* Sidebar */}
             <aside className="w-64 bg-[#0f0f0f] border-r border-white/5 hidden md:flex flex-col">
                 <div className="p-6 border-b border-white/5">
                     <div className="flex items-center gap-2 text-white font-bold">
@@ -82,7 +81,6 @@ const Admin = () => {
                 </div>
             </aside>
 
-            {/* Main Content */}
             <main className="flex-1 p-8 overflow-y-auto">
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-2xl font-bold">Project Database</h1>
@@ -103,7 +101,7 @@ const Admin = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
-                            {mockProjects.map((project, idx) => (
+                            {projects.map((project, idx) => (
                                 <tr key={idx} className="hover:bg-white/5 transition-colors">
                                     <td className="p-4 font-medium text-white">{project.name}</td>
                                     <td className="p-4 text-gray-400 text-sm">{project.stack}</td>
@@ -134,7 +132,7 @@ const SidebarItem = ({ icon: Icon, label, active }) => (
     </button>
 );
 
-const mockProjects = [
+const projects = [
     { name: 'AI RAG System', stack: 'Python, LangChain', status: 'Deployed', color: 'bg-green-500/10 text-green-500' },
     { name: 'Speech Coach AI', stack: 'FastAPI, OpenAI', status: 'In Development', color: 'bg-yellow-500/10 text-yellow-500' },
     { name: 'Smart Portfolio v2', stack: 'React, Vite', status: 'Live', color: 'bg-blue-500/10 text-blue-500' },

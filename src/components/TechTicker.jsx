@@ -26,7 +26,7 @@ const techs = [
 const TechTicker = () => {
     return (
         <div className="relative w-full py-10 overflow-hidden bg-page border-y border-white/5">
-            {/* Fade masks - narrower on mobile */}
+            {/* render fade masks */}
             <div className="absolute inset-y-0 left-0 z-10 w-12 md:w-20 bg-gradient-to-r from-page to-transparent" />
             <div className="absolute inset-y-0 right-0 z-10 w-12 md:w-20 bg-gradient-to-l from-page to-transparent" />
 
@@ -40,7 +40,7 @@ const TechTicker = () => {
                         repeat: Infinity,
                     }}
                 >
-                    {/* Double the list for seamless loop */}
+                    {/* double list for loop */}
                     {[...techs, ...techs].map((tech, index) => (
                         <div key={index} className="flex flex-col items-center justify-center gap-2 group cursor-default">
                             <tech.icon

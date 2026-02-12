@@ -41,7 +41,6 @@ const SkillMonitor = () => (
     </h4>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* Column 1: Core Engine */}
       <div>
         <h5 className="font-bold text-white text-sm mb-4 border-b border-white/10 pb-2">Core AI Engine</h5>
         <SkillBar name="Python" level={10} />
@@ -51,7 +50,6 @@ const SkillMonitor = () => (
         <SkillBar name="LLMs" level={10} />
       </div>
 
-      {/* Column 2: Web Interface & Infra */}
       <div>
         <h5 className="font-bold text-white text-sm mb-4 border-b border-white/10 pb-2">Frontend Interface</h5>
         <SkillBar name="React (Vite)" level={10} />
@@ -77,7 +75,6 @@ const About = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left: Image / Visual */}
           <div className="relative group top-0 md:sticky md:top-24">
             <div className="absolute -inset-1 bg-gradient-to-r from-white/10 to-white/5 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-500 max-w-sm mx-auto"></div>
             <div className="relative w-full aspect-[4/5] bg-[#0f0f0f] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center max-w-sm mx-auto">
@@ -92,7 +89,6 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right: Specs */}
           <div className="bg-[#0f0f0f] border border-white/10 rounded-xl p-6 shadow-2xl">
             <div className="flex items-center gap-2 mb-6 pb-4 border-b border-white/10">
               <div className="w-3 h-3 rounded-full bg-red-500" />

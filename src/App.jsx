@@ -7,12 +7,11 @@ import Admin from './components/Admin';
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  // Don't show Navbar/Footer on Admin
+  // check admin route
   const isAdmin = location.pathname.startsWith('/admin');
 
   return (
     <div className="min-h-screen bg-page text-primary font-sans selection:bg-accent-green/30 selection:text-white pb-20 relative">
-      {/* Background Grid - Global */}
       <div className="bg-grid-pattern" />
 
       {!isAdmin && <Navbar />}

@@ -17,7 +17,7 @@ const ChatModal = ({ isOpen, onClose }) => {
     const inputRef = useRef(null);
     const messagesEndRef = useRef(null);
 
-    // Initial State
+    // initialize state variables
     const [messages, setMessages] = useState([
         {
             role: 'assistant',
@@ -26,10 +26,10 @@ const ChatModal = ({ isOpen, onClose }) => {
     ]);
     const [inputValue, setInputValue] = useState("");
     const [isTyping, setIsTyping] = useState(false);
-    const [isStreaming, setIsStreaming] = useState(false); // Track if currently generating
+    const [isStreaming, setIsStreaming] = useState(false); // track streaming status
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 
-    // Focus input on open
+    // focus input on mount
     useEffect(() => {
         if (isOpen && inputRef.current) {
             inputRef.current.focus();
@@ -37,12 +37,12 @@ const ChatModal = ({ isOpen, onClose }) => {
         }
     }, [isOpen]);
 
-    // Auto-scroll to bottom
+    // scroll to bottom
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages, isTyping, isStreaming]);
 
-    // Filter suggestions
+    // filter suggestions based on input
     useEffect(() => {
         if (inputValue.trim() === "") {
             setFilteredSuggestions(SUGGESTIONS);
@@ -55,7 +55,7 @@ const ChatModal = ({ isOpen, onClose }) => {
     }, [inputValue]);
 
     const handleSend = async (text = inputValue) => {
-        if (!text.trim() || isStreaming) return; // Prevent double send
+        if (!text.trim() || isStreaming) return; // prevent duplicate submissions
 
         const userMsg = text;
         setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
@@ -73,9 +73,9 @@ const ChatModal = ({ isOpen, onClose }) => {
 
             if (!response.ok) throw new Error('Failed to connect to AI service');
 
-            // Initialize empty assistant message
+            // initialize assistant message placeholder
             setMessages(prev => [...prev, { role: 'assistant', text: "" }]);
-            setIsTyping(false); // Remove "processing..." loader, start streaming text
+            setIsTyping(false); // stop typing indicator
 
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
@@ -86,7 +86,7 @@ const ChatModal = ({ isOpen, onClose }) => {
 
                 const chunk = decoder.decode(value, { stream: true });
 
-                // Update the last message with the new chunk
+                // append chunk to message
                 setMessages(prev => {
                     const newMessages = [...prev];
                     const lastMsgIndex = newMessages.length - 1;
@@ -102,7 +102,7 @@ const ChatModal = ({ isOpen, onClose }) => {
             console.error('Error:', error);
             setMessages(prev => [...prev, {
                 role: 'assistant',
-                text: "⚠️ **ERROR:** Connection to neural link failed. Please ensure the backend server is running."
+                text: "**ERROR:** Connection to neural link failed. Please ensure the backend server is running."
             }]);
             setIsTyping(false);
         } finally {
@@ -123,7 +123,7 @@ const ChatModal = ({ isOpen, onClose }) => {
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Backdrop */}
+
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -132,7 +132,7 @@ const ChatModal = ({ isOpen, onClose }) => {
                         className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm"
                     />
 
-                    {/* Modal Window */}
+
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -141,7 +141,7 @@ const ChatModal = ({ isOpen, onClose }) => {
                     >
                         <div className="w-full max-w-2xl h-[650px] flex flex-col bg-[#0a0a0a] border border-white/10 rounded-xl shadow-2xl overflow-hidden pointer-events-auto ring-1 ring-accent-green/20">
 
-                            {/* Header */}
+
                             <div className="flex items-center justify-between px-4 py-3 bg-[#111] border-b border-white/5">
                                 <div className="flex items-center gap-2">
                                     <div className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
@@ -152,12 +152,12 @@ const ChatModal = ({ isOpen, onClose }) => {
                                 </button>
                             </div>
 
-                            {/* Chat Body */}
+
                             <div className="flex-1 overflow-y-auto p-4 space-y-6 font-mono text-sm scrollbar-brand bg-black/40">
                                 {messages.map((msg, idx) => (
                                     <div key={idx} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
 
-                                        {/* Avatar Icons */}
+
                                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 overflow-hidden ${msg.role === 'user' ? 'bg-white/10' : 'bg-accent-green/10 border border-accent-green/20'
                                             }`}>
                                             {msg.role === 'user' ? (
@@ -169,12 +169,12 @@ const ChatModal = ({ isOpen, onClose }) => {
                                             )}
                                         </div>
 
-                                        {/* Message Bubble */}
+
                                         <div className={`max-w-[85%] p-3 rounded-lg border transition-all ${msg.role === 'user'
                                             ? 'bg-white/5 border-white/10 text-gray-100'
                                             : 'bg-accent-green/5 border-accent-green/20 text-gray-200 shadow-[0_0_15px_rgba(0,255,65,0.05)]'
                                             }`}>
-                                            {/* RENDER MARKDOWN PROPERLY */}
+
                                             <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-black/50 prose-pre:border prose-pre:border-white/5">
                                                 <ReactMarkdown
                                                     remarkPlugins={[remarkGfm]}
@@ -183,9 +183,9 @@ const ChatModal = ({ isOpen, onClose }) => {
                                                         h1: ({ node, ...props }) => <h1 {...props} className="text-accent-green font-bold text-lg mb-2 mt-4" />,
                                                         h2: ({ node, ...props }) => <h2 {...props} className="text-accent-green font-semibold text-md mb-2 mt-3" />,
                                                         h3: ({ node, ...props }) => <h3 {...props} className="text-accent-green/90 font-medium text-sm mb-1 mt-2" />,
-                                                        // Style links to look like terminal commands
+                                                        // style links as terminal commands
                                                         a: ({ node, ...props }) => <a {...props} className="text-accent-green hover:underline cursor-pointer font-bold" target="_blank" rel="noopener noreferrer" />,
-                                                        // Style code blocks
+                                                        // style code blocks
                                                         code: ({ node, inline, className, children, ...props }) => {
                                                             const content = String(children);
                                                             const isCommand = content.trim().startsWith('$');
@@ -217,7 +217,7 @@ const ChatModal = ({ isOpen, onClose }) => {
                                                 </ReactMarkdown>
                                             </div>
 
-                                            {/* Blinking Cursor for latest AI message while streaming */}
+
                                             {msg.role === 'assistant' && idx === messages.length - 1 && isStreaming && (
                                                 <span className="inline-block w-2 h-4 bg-accent-green animate-pulse ml-1 align-middle"></span>
                                             )}
@@ -234,9 +234,9 @@ const ChatModal = ({ isOpen, onClose }) => {
                                 <div ref={messagesEndRef} />
                             </div>
 
-                            {/* Suggestions & Input Area */}
+
                             <div className="bg-[#111] border-t border-white/5 flex flex-col p-2">
-                                {/* Auto-Suggestions */}
+
                                 {filteredSuggestions.length > 0 && !isStreaming && (
                                     <div className="px-2 py-2 flex gap-2 overflow-x-auto scrollbar-hide mb-2">
                                         {filteredSuggestions.map((suggestion, idx) => (
@@ -251,7 +251,7 @@ const ChatModal = ({ isOpen, onClose }) => {
                                     </div>
                                 )}
 
-                                {/* Input */}
+
                                 <div className="flex items-center gap-3 bg-black/50 border border-white/10 rounded-lg px-3 py-2 focus-within:border-accent-green/50 transition-colors">
                                     <Terminal size={16} className="text-gray-500" />
                                     <input

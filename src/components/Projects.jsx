@@ -6,10 +6,8 @@ const ProjectCard = ({ className, title, desc, tags, githubUrl, externalUrl }) =
         <div
             className={`relative group overflow-hidden rounded-xl border border-white/10 p-6 flex flex-col justify-end transition-all hover:scale-[1.02] ${className}`}
         >
-            {/* Dark Overlay: More subtle change on hover */}
             <div className="absolute inset-0 bg-black/80 group-hover:bg-black/90 transition-colors duration-300" />
 
-            {/* Content: Z-Index ensures it sits on top */}
             <div className="relative z-10 space-y-3">
                 <div className="flex justify-between items-start">
                     <h3 className="text-2xl font-bold text-white group-hover:text-accent-green transition-colors">{title}</h3>
@@ -31,7 +29,6 @@ const ProjectCard = ({ className, title, desc, tags, githubUrl, externalUrl }) =
                     {desc}
                 </p>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2 pt-2">
                     {tags.map((tag) => (
                         <span key={tag} className="text-xs font-mono text-accent-green bg-accent-green/10 px-2 py-1 rounded border border-accent-green/20">
@@ -55,7 +52,6 @@ const Projects = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
-                    {/* Main Feature */}
                     <ProjectCard
                         className="md:col-span-2 md:row-span-2 bg-[url('https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80')] bg-cover bg-center"
                         title="TouristAI: RAG Travel Concierge"
@@ -65,7 +61,6 @@ const Projects = () => {
                         externalUrl="https://drive.google.com/file/d/1R0LHZbzEqW3W4zS-svARdv2gNcbKT-vM/view?usp=drive_link"
                     />
 
-                    {/* Secondary 1 */}
                     <ProjectCard
                         className="md:col-span-1 md:row-span-1 bg-[url('https://i.ibb.co/84nxGcXc/Taxgpt.png')] bg-cover bg-center"
                         title="TaxGPT"
@@ -75,7 +70,6 @@ const Projects = () => {
 
                     />
 
-                    {/* Secondary 2 */}
                     <ProjectCard
                         className="md:col-span-1 md:row-span-1 bg-[url('https://i.ibb.co/m5HY5Jgb/smart-portfolio.png')] bg-cover bg-top bg-no-repeat bg-center bg-[#0a0a0a]"
                         title="Smart Portfolio"

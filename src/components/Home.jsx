@@ -14,7 +14,7 @@ const Home = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Logic: If user scrolled past Hero (heuristic value)
+            // check scroll position
             if (window.scrollY > 450) {
                 setShowHeroRobot(false);
             } else {
@@ -36,7 +36,7 @@ const Home = () => {
                 <Contact />
             </main>
 
-            {/* Persistent Robot (Fixed Position) */}
+            {/* render persistent robot */}
             <AnimatePresence>
                 {!showHeroRobot && (
                     <motion.div

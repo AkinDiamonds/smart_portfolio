@@ -7,12 +7,10 @@ const Hero = ({ showRobot, onChatOpen }) => {
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center py-20 px-6 overflow-hidden">
 
-      {/* Background Elements */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-green/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-12 items-center">
 
-        {/* Text Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,12 +62,10 @@ const Hero = ({ showRobot, onChatOpen }) => {
           </div>
         </motion.div>
 
-        {/* Robot / Visual Area */}
         <div className="order-1 lg:order-2 flex justify-center items-center relative min-h-[300px]">
           <div className="relative z-10 w-full flex flex-col items-center justify-center">
             {showRobot ? (
               <motion.div layoutId="robot-mascot" className="relative group/robot">
-                {/* Chat Bubble Tooltip */}
                 <div className="absolute -top-16 -right-16 md:-right-24 bg-white/10 backdrop-blur-md border border-accent-green/30 p-3 rounded-lg max-w-[150px] text-xs text-white font-mono opacity-0 group-hover/robot:opacity-100 transition-opacity duration-300 pointer-events-none z-20">
                   "Hey! I'm Nexus, Simeon's AI assistant. Ask me about his work."
                   <div className="absolute bottom-0 left-0 w-3 h-3 bg-white/10 border-b border-l border-accent-green/30 transform -translate-x-1/2 translate-y-1/2 rotate-45"></div>

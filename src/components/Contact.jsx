@@ -10,8 +10,8 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Simulate submission
-        await axios("https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact", 
+        // simulate submission
+        await axios("https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact",
             {
                 method: "POST",
                 headers: {
@@ -32,7 +32,6 @@ const Contact = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12">
-                    {/* Contact Info */}
                     <div className="space-y-8">
                         <h3 className="text-2xl font-bold text-white">Let Me Help You Build Something Intelligent</h3>
                         <p className="text-gray-400 leading-relaxed">
@@ -56,7 +55,6 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-6 bg-[#0f0f0f] p-8 rounded-xl border border-white/10">
                         <div>
                             <label className="block text-sm font-mono text-gray-400 mb-2">Name</label>
