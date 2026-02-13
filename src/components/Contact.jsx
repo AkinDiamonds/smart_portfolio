@@ -10,25 +10,33 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch("https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "ngrok-skip-browser-warning": "true",
+        
+        // 1. N8N production URL
+        const webhookUrl = "https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact";
 
+        // 2. format data as a standard HTML form string, not json
+        // This tricks the browser into thinking it's a simple form submission
+        const urlEncodedData = new URLSearchParams(formData).toString();
+
+        try {
+            await fetch(webhookUrl, {
+                method: "POST",
+                mode: "no-cors", // <--- CRITICAL o"
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded", // to send as form directly
                 },
-                body: JSON.stringify(formData)
+                body: urlEncodedData
             });
 
-            if (response.ok) {
-                setFormData({ name: '', email: '', message: '' });
-                console.log("Form submitted successfully");
-            } else {
-                console.error("Form submission failed");
-            }
+            // With 'no-cors', we won't get a readable response (response.ok is always false), 
+            // but the request DID leave the browser.
+            setFormData({ name: '', email: '', message: '' });
+            alert("Message Sent! (Protocol: Blind-Fire)");
+            console.log("Request sent via no-cors mode");
+
         } catch (error) {
-            console.error("Error submitting form:", error);
+            console.error("Transmission Error:", error);
+            alert("Failed to send message.");
         }
     };
 
