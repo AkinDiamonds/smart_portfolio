@@ -95,11 +95,7 @@ const Contact = () => {
 
                         <button
                             type="submit"
-<<<<<<< HEAD
-                            className="w-full py-3 bg-accent-green text-black font-bold rounded-lg hover:bg-emerald-400 hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-accent-green/50" 
-=======
-                            className="w-full py-3 bg-accent-green text-black font-bold rounded-lg hover:bg-emerald-400 hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-accent-green/50" onSubmit={handleSubmit}
->>>>>>> ffce6c113f4caa3b536987be40df1fdd33ab1f95
+                            className="w-full py-3 bg-accent-green text-black font-bold rounded-lg hover:bg-emerald-400 hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-accent-green/50"
                         >
                             <Send size={18} />
                             Send Message
