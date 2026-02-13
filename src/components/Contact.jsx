@@ -14,7 +14,9 @@ const Contact = () => {
             const response = await fetch("https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "ngrok-skip-browser-warning": "true",
+
                 },
                 body: JSON.stringify(formData)
             });
