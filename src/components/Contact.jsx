@@ -10,17 +10,24 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // n8n submission
-        await axios("https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact",
-            {
+        try {
+            const response = await fetch("https://hypermotile-auteciously-wynell.ngrok-free.dev/webhook/contact", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                data: formData
+                body: JSON.stringify(formData)
+            });
+
+            if (response.ok) {
+                setFormData({ name: '', email: '', message: '' });
+                console.log("Form submitted successfully");
+            } else {
+                console.error("Form submission failed");
             }
-        );
-        setFormData({ name: '', email: '', message: '' });
+        } catch (error) {
+            console.error("Error submitting form:", error);
+        }
     };
 
     return (
